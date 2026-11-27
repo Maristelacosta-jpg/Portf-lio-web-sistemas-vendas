@@ -1,41 +1,25 @@
-# 🛒 Portfólio Web Sistemas de Vendas
+# 🛒 Portfólio Web — Sistema de Vendas
+
+🔗 **[Acesse o projeto online aqui](SEU-LINK-DO-GITHUB-PAGES)**
+
+![Preview do Projeto](caminho-ou-link-da-sua-imagem.png)
 
 ## 📖 Sobre o Projeto
-
-Projeto criado para praticar conceitos de desenvolvimento web, versionamento de código e utilização da plataforma GitHub.
-
-## 🎯 Objetivos
-
-- Aprender Git e GitHub
-- Desenvolver páginas web
-- Organizar projetos de software
-- Praticar lógica de programação
-
-## 🚀 Tecnologias Utilizadas
-
-- HTML5
-- CSS3
-- Git
-- GitHub
+Aplicação web desenvolvida para simular um sistema de vendas, com foco na prática de manipulação do DOM, lógica de programação e versionamento de código com Git e GitHub.
 
 ## ✅ Funcionalidades
+- Adição e listagem dinâmica de itens/vendas
+- Cálculo de valores e atualização da interface em tempo real
+- Remoção de registros da lista
+- Layout responsivo adaptado para diferentes telas
 
-- Estruturação de páginas web
-- Apresentação de sistemas de vendas
-- Prática de versionamento
+## 🚀 Tecnologias Utilizadas
+- **HTML5** — Estruturação semântica
+- **CSS3** — Estilização e layout
+- **JavaScript** — Lógica de programação e interatividade
+- **Git & GitHub** — Controle de versão e hospedagem
 
-## 📚 Aprendizados
-
-- HTML
-- CSS
-- Git
-- GitHub
-- Desenvolvimento Web
-
-## 👩‍💻 Autora
-
-Maristela Costa
-
-📍 Curitiba - PR, Brasil
-
-🔗 GitHub: https://github.com/maristelagatinhapreta-jpg
+## 💻 Como executar localmente
+1. Clone este repositório:
+   ```bash
+   git clone [https://github.com/Maristelacosta-jpg/Portf-lio-web-sistemas-vendas.git](https://github.com/Maristelacosta-jpg/Portf-lio-web-sistemas-vendas.git)
