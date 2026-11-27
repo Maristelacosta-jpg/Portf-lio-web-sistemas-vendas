@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfólio de Sistema de Vendas desenvolvido com HTML5, CSS3 e JavaScript por Maristela Costa.">
-    <title>Sistema de Vendas | Maristela Costa</title>
+    <title>Sistema de Vendas | Portfólio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Ícones do FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="script.js" defer></script>
 </head>
@@ -14,9 +12,9 @@
     <header class="hero">
         <div class="hero-content">
             <h1><i class="fa-solid fa-store" aria-hidden="true"></i> Sistema de Vendas</h1>
-            <p>Aplicação web voltada à organização de vendas e cadastros, criada para praticar desenvolvimento Front-end e boas práticas com Git e GitHub.</p>
+            <p>Aplicação web para cadastro de produtos, cálculo automático de valores e prática de Front-end.</p>
             <div class="hero-buttons">
-                <a href="#funcionalidades" class="btn primary">Ver Funcionalidades</a>
+                <a href="#sistema" class="btn primary">Ir para o Sistema</a>
                 <a href="https://github.com/Maristelacosta-jpg" target="_blank" rel="noopener noreferrer" class="btn secondary">
                     <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
                 </a>
@@ -24,39 +22,52 @@
         </div>
     </header>
 
-    <main class="container">
-        <section id="sobre" class="card" aria-labelledby="titulo-sobre">
-            <h2 id="titulo-sobre"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Sobre o Projeto</h2>
-            <p>Projeto desenvolvido para consolidar fundamentos de desenvolvimento web, responsividade, manipulação da interface e versionamento de código com Git e GitHub.</p>
+    <main id="sistema" class="container">
+        <section class="card">
+            <h2><i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Novo Produto</h2>
+            <form id="productForm" class="form-grid">
+                <div class="form-group">
+                    <label for="productName">Nome do produto</label>
+                    <input type="text" id="productName" placeholder="Ex.: Camiseta Básica" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="productPrice">Preço (R$)</label>
+                    <input type="number" id="productPrice" step="0.01" min="0.01" placeholder="Ex.: 49.90" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i> Adicionar
+                    </button>
+                    <button type="button" id="clearAllBtn" class="btn-delete">
+                        <i class="fa-solid fa-trash-can" aria-hidden="true"></i> Limpar Tudo
+                    </button>
+                </div>
+            </form>
         </section>
 
-        <section id="funcionalidades" class="grid-section" aria-labelledby="titulo-funcionalidades">
-            <h2 id="titulo-funcionalidades" class="sr-only">Funcionalidades</h2>
-            <article class="card feature-card">
-                <i class="fa-solid fa-cart-shopping icon" aria-hidden="true"></i>
-                <h3>Gestão de Vendas</h3>
-                <p>Registro e acompanhamento de pedidos e valores de forma simples e objetiva.</p>
-            </article>
-            <article class="card feature-card">
-                <i class="fa-solid fa-users icon" aria-hidden="true"></i>
-                <h3>Clientes e Produtos</h3>
-                <p>Estrutura pensada para organizar itens, clientes e consultas com clareza.</p>
-            </article>
-            <article class="card feature-card">
-                <i class="fa-solid fa-chart-line icon" aria-hidden="true"></i>
-                <h3>Interface Responsiva</h3>
-                <p>Layout adaptável para desktops, tablets e celulares, com foco em usabilidade.</p>
-            </article>
-        </section>
-
-        <section id="tecnologias" class="card" aria-labelledby="titulo-tecnologias">
-            <h2 id="titulo-tecnologias"><i class="fa-solid fa-code" aria-hidden="true"></i> Tecnologias Utilizadas</h2>
-            <ul class="tech-list">
-                <li><i class="fa-brands fa-html5" style="color: #e34f26;" aria-hidden="true"></i> HTML5 Semântico</li>
-                <li><i class="fa-brands fa-css3-alt" style="color: #1572b6;" aria-hidden="true"></i> CSS3 (Flexbox e Grid)</li>
-                <li><i class="fa-brands fa-js" style="color: #f7df1e;" aria-hidden="true"></i> JavaScript</li>
-                <li><i class="fa-brands fa-git-alt" style="color: #f05032;" aria-hidden="true"></i> Git &amp; GitHub</li>
-            </ul>
+        <section class="card">
+            <h2><i class="fa-solid fa-table" aria-hidden="true"></i> Produtos Cadastrados</h2>
+            <div class="table-wrapper">
+                <table id="productTable">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td id="totalValue"><strong>R$ 0,00</strong></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </section>
     </main>
 
