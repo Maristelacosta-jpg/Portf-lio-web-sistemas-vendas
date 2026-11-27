@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const STORAGE_KEY = 'portfolio_vendas_produtos_v1';
+
     const productForm = document.getElementById('productForm');
     const productTableBody = document.querySelector('#productTable tbody');
     const productNameInput = document.getElementById('productName');
     const productPriceInput = document.getElementById('productPrice');
     const totalValueEl = document.getElementById('totalValue');
+    const clearAllBtn = document.getElementById('clearAllBtn');
 
     if (!productForm || !productTableBody || !productNameInput || !productPriceInput || !totalValueEl) {
         return;
@@ -14,15 +17,51 @@ document.addEventListener('DOMContentLoaded', () => {
         currency: 'BRL'
     });
 
-    let products = [];
+    function loadProducts() {
+        try {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (!savedData) return [];
+
+            const parsed = JSON.parse(savedData);
+            if (!Array.isArray(parsed)) return [];
+
+            return parsed.filter(
+                (item) =>
+                    item &&
+                    typeof item.id === 'string' &&
+                    typeof item.name === 'string' &&
+                    typeof item.price === 'number' &&
+                    !Number.isNaN(item.price) &&
+                    item.price > 0
+            );
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            return [];
+        }
+    }
+
+    function saveProducts(items) {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        } catch (error) {
+            console.error('Erro ao salvar produtos:', error);
+        }
+    }
+
+    let products = loadProducts();
 
     function calculateTotal() {
         return products.reduce((sum, item) => sum + item.price, 0);
     }
 
     function updateTotalDisplay() {
-        const total = calculateTotal();
-        totalValueEl.textContent = currencyFormatter.format(total);
+        totalValueEl.textContent = currencyFormatter.format(calculateTotal());
+    }
+
+    function updateClearButtonState() {
+        if (clearAllBtn) {
+            clearAllBtn.disabled = products.length === 0;
+        }
     }
 
     function createProductRow(product) {
@@ -57,11 +96,26 @@ document.addEventListener('DOMContentLoaded', () => {
         productTableBody.innerHTML = '';
 
         products.forEach((product) => {
-            const row = createProductRow(product);
-            productTableBody.appendChild(row);
+            productTableBody.appendChild(createProductRow(product));
         });
 
         updateTotalDisplay();
+        updateClearButtonState();
+        saveProducts(products);
+    }
+
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+            if (products.length === 0) return;
+
+            const confirmed = confirm('Tem certeza de que deseja apagar todos os produtos?');
+            if (!confirmed) return;
+
+            products = [];
+            localStorage.removeItem(STORAGE_KEY);
+            renderProducts();
+            productNameInput.focus();
+        });
     }
 
     productForm.addEventListener('submit', (event) => {
@@ -76,18 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const newProduct = {
+        products.push({
             id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()),
             name,
             price: numericPrice
-        };
+        });
 
-        products.push(newProduct);
         renderProducts();
-
         productForm.reset();
         productNameInput.focus();
     });
 
-    updateTotalDisplay();
+    renderProducts();
 });
