@@ -1,7 +1,142 @@
-/* Estilo para o botão de apagar na tabela */
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --danger: #ef4444;
+    --border: rgba(148, 163, 184, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.hero {
+    padding: 3rem 1.25rem;
+    text-align: center;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-content {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.hero p {
+    color: var(--muted);
+    margin: 0.75rem 0 1.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.25rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+}
+
+.card h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.form-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.form-group input {
+    padding: 0.65rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.btn.primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn.secondary {
+    background-color: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
 .btn-delete {
     background-color: rgba(239, 68, 68, 0.15);
-    color: #ef4444;
+    color: var(--danger);
     border: 1px solid rgba(239, 68, 68, 0.3);
     padding: 0.4rem 0.8rem;
     border-radius: 6px;
@@ -18,16 +153,34 @@
 }
 
 .btn-delete:hover {
-    background-color: #ef4444;
-    border-color: #ef4444;
+    background-color: var(--danger);
+    border-color: var(--danger);
     color: #ffffff;
 }
 
 .btn-delete:focus-visible {
-    outline: 2px solid #ef4444;
+    outline: 2px solid var(--danger);
     outline-offset: 2px;
 }
 
 .btn-delete:active {
     transform: scale(0.98);
+}
+
+.btn-delete:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.btn-delete:disabled:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--danger);
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
 }
