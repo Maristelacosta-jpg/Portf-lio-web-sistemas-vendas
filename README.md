@@ -1,9 +1,5 @@
 # 🛒 Portfólio Web — Sistema de Vendas
 
-🔗 **[Acesse o projeto online aqui](SEU-LINK-DO-GITHUB-PAGES)**
-
-![Preview do Projeto](caminho-ou-link-da-sua-imagem.png)
-
 ## 📖 Sobre o Projeto
 Aplicação web desenvolvida para simular um sistema de vendas, com foco na prática de manipulação do DOM, lógica de programação e versionamento de código com Git e GitHub.
 
