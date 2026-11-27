@@ -3,8 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const productTableBody = document.querySelector('#productTable tbody');
     const productNameInput = document.getElementById('productName');
     const productPriceInput = document.getElementById('productPrice');
+    const totalValueEl = document.getElementById('totalValue');
 
-    if (!productForm || !productTableBody || !productNameInput || !productPriceInput) {
+    if (!productForm || !productTableBody || !productNameInput || !productPriceInput || !totalValueEl) {
         return;
     }
 
@@ -13,31 +14,54 @@ document.addEventListener('DOMContentLoaded', () => {
         currency: 'BRL'
     });
 
-    function createProductRow(name, formattedPrice) {
+    let products = [];
+
+    function calculateTotal() {
+        return products.reduce((sum, item) => sum + item.price, 0);
+    }
+
+    function updateTotalDisplay() {
+        const total = calculateTotal();
+        totalValueEl.textContent = currencyFormatter.format(total);
+    }
+
+    function createProductRow(product) {
         const newRow = document.createElement('tr');
 
         const nameCell = document.createElement('td');
-        nameCell.textContent = name;
+        nameCell.textContent = product.name;
 
         const priceCell = document.createElement('td');
-        priceCell.textContent = formattedPrice;
+        priceCell.textContent = currencyFormatter.format(product.price);
 
         const actionCell = document.createElement('td');
         const deleteBtn = document.createElement('button');
 
         deleteBtn.type = 'button';
         deleteBtn.className = 'btn-delete';
-        deleteBtn.setAttribute('aria-label', `Apagar ${name}`);
+        deleteBtn.setAttribute('aria-label', `Apagar ${product.name}`);
         deleteBtn.innerHTML = '<i class="fa-solid fa-trash" aria-hidden="true"></i> Apagar';
 
         deleteBtn.addEventListener('click', () => {
-            newRow.remove();
+            products = products.filter((item) => item.id !== product.id);
+            renderProducts();
         });
 
         actionCell.appendChild(deleteBtn);
         newRow.append(nameCell, priceCell, actionCell);
 
         return newRow;
+    }
+
+    function renderProducts() {
+        productTableBody.innerHTML = '';
+
+        products.forEach((product) => {
+            const row = createProductRow(product);
+            productTableBody.appendChild(row);
+        });
+
+        updateTotalDisplay();
     }
 
     productForm.addEventListener('submit', (event) => {
@@ -52,11 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const formattedPrice = currencyFormatter.format(numericPrice);
-        const newRow = createProductRow(name, formattedPrice);
+        const newProduct = {
+            id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()),
+            name,
+            price: numericPrice
+        };
 
-        productTableBody.appendChild(newRow);
+        products.push(newProduct);
+        renderProducts();
+
         productForm.reset();
         productNameInput.focus();
     });
+
+    updateTotalDisplay();
 });
